@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
+    <persistence-unit name="projectreport" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.ejb.HibernatePersistence</provider>
+
+        <!--授权管理平台-->
+        <class>cn.damai.boss.projectreport.domain.Upt01Operator</class>
+        <class>cn.damai.boss.projectreport.domain.Upt01MaitixUser</class>
+        <class>cn.damai.boss.projectreport.domain.Upt01OperatorLog</class>
+        <class>cn.damai.boss.projectreport.domain.Upt01ReportRole</class>
+        <class>cn.damai.boss.projectreport.domain.Upt01RoleReport</class>
+        <class>cn.damai.boss.projectreport.domain.Upt01Report</class>
+
+        <!--大麦报表平台-->
+        <class>cn.damai.boss.projectreport.domain.Upt01SearchTemplate</class>
+        <class>cn.damai.boss.projectreport.domain.Upt01Project</class>
+        <class>cn.damai.boss.projectreport.domain.Upt01ProjectTask</class>
+        <class>cn.damai.boss.projectreport.domain.Upt01Sale</class>
+        <class>cn.damai.boss.projectreport.domain.Upt01SaleDiscount</class>
+        <class>cn.damai.boss.projectreport.domain.Upt01SeatStat</class>
+        <class>cn.damai.boss.projectreport.domain.Upt01ReserveStat</class>
+        <class>cn.damai.boss.projectreport.domain.Upt01StandStat</class>
+        <class>cn.damai.boss.projectreport.domain.Upt01SellerSale</class>
+        <class>cn.damai.boss.projectreport.domain.Upt01SellerSaleDiscount</class>
+        
+        <properties>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
+        </properties>
+    </persistence-unit>
+</persistence>

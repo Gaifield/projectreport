@@ -1,0 +1,111 @@
+@charset "utf-8";
+/**
+ * Created with HuangMaoMao.
+ * Date: 12-12-17
+ * Time: 上午11:26
+ * 更新： 2012-12-18 14：00
+ * 登陆
+ */
+
+.login-body {
+    background: url(../images/login-bj.png);
+    width: 100%;
+    height: 100%;
+}
+
+.filter-lay {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background: url(../images/login-c.png) no-repeat center;
+}
+
+.pos {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+}
+
+.login-log {
+    width: 478px;
+    height: 284px;
+    background: url(../images/login-logo.png) no-repeat center;
+    margin: -334px auto 0 auto;
+}
+
+.login-form {
+    width: 675px;
+    margin: 70px auto 0 auto;
+    position: relative;
+    z-index: 10000;
+}
+
+.login-tips {
+    height: 22px;
+    background: url(../images/login-tips.png) no-repeat;
+}
+
+.login-inp-line {
+    margin-top: 18px;
+    height: 44px;
+}
+
+.login-enter, .login-sub {
+    display: inline;
+    float: left;
+    margin-right: 10px;
+    width: 258px;
+    height: 44px;
+    font-family: "微软雅黑";
+    background: url(../images/login-form.png) no-repeat;
+}
+
+.login-enter input {
+    float: left;
+    outline: none;
+    width: 238px;
+    height: 30px;
+    margin: 5px 10px;
+    font-family: "微软雅黑";
+    font-size: 24px;
+    line-height: 30px;
+    vertical-align: middle;
+    background: none;
+    border: none;
+}
+
+.login-sub {
+    float: left;
+    border: none;
+    width: 125px;
+    height: 43px;
+    background-position: 0 -44px;
+    cursor: pointer;
+}
+
+.login-sub:hover {
+    background-position: -126px -44px;
+}
+
+.save-msg {
+    margin-top: 18px;
+    color: #ffffff;
+}
+
+.save-msg input {
+    vertical-align: -2px;
+    margin-right: 10px;
+}
+
+.login-bot {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 65px;
+    line-height: 65px;
+    color: #43abc1;
+    text-align: center;
+    background: url(../images/login-bot.png) no-repeat bottom center;
+}

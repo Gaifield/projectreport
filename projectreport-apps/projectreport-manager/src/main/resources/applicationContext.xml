@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+        http://www.springframework.org/schema/data/jpa
+        http://www.springframework.org/schema/data/jpa/spring-jpa-1.0.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+        
+    <context:property-placeholder location="classpath*:crius.properties" ignore-unresolvable="true"/>		
+    <aop:aspectj-autoproxy proxy-target-class="true"/>  
+    <context:component-scan base-package="cn.damai.boss.projectreport.common.service.impl,cn.damai.boss.projectreport.manager.dao.impl,cn.damai.boss.projectreport.manager.service.impl">
+    </context:component-scan>
+
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+          destroy-method="close">
+        <property name="driverClassName" value="${projectreport.jdbc.driverClassName}"/>
+        <property name="url" value="${projectreport.jdbc.url}"/>
+        <property name="username" value="${projectreport.jdbc.username}"/>
+        <property name="password" value="${projectreport.jdbc.password}"/>
+        <!--连接池启动时的初始化 -->
+        <property name="initialSize" value="${projectreport.jdbc.initialSize}"/>
+        <!--连接池的最大值 -->
+        <property name="maxActive" value="${projectreport.jdbc.maxActive}"/>
+        <!-- 最大空闲值，当经过一个高峰时间后，连接池可以慢慢将已经用不到的链接慢慢释放一部分，一直减少到maxle为止 -->
+        <property name="maxIdle" value="${projectreport.jdbc.maxIdle}"/>
+        <!-- 最小空闲值，当空闲的连接数少于阀值时，连接池就会预申请去一些链接，以免洪峰来时来不及申请 -->
+        <property name="minIdle" value="${projectreport.jdbc.minIdle}"/>
+        <!-- 验证数据库连接的有效性 -->
+        <property name="timeBetweenEvictionRunsMillis" value="10000" />
+        <property name="minEvictableIdleTimeMillis" value="600000" />
+        <property name="validationQuery" value="SELECT 1 FROM Dual" />
+        <property name="removeAbandoned" value="true" />
+        <property name="removeAbandonedTimeout" value="120" />
+        <property name="logAbandoned" value="true" />
+        <property name="testOnBorrow" value="true" />
+    </bean>
+
+    <bean id="projectReportManagerFactory"
+          class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="persistenceUnitName" value="projectreport"/>
+        <property name="persistenceXmlLocation" value="classpath*:META-INF/persistence.xml"/>
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+                <property name="generateDdl" value="false"/>
+                <property name="showSql" value="false"/>
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="projectReportTransactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="projectReportManagerFactory"/>
+    </bean>
+    <tx:annotation-driven transaction-manager="projectReportTransactionManager"/>
+    <jpa:repositories base-package="cn.damai.boss.projectreport.manager.dao"
+                      query-lookup-strategy="create-if-not-found" repository-impl-postfix="CustomImpl"
+                      entity-manager-factory-ref="projectReportManagerFactory"
+                      transaction-manager-ref="projectReportTransactionManager">
+    </jpa:repositories>
+
+    <!--memcache -->
+    <bean name="memcachedClientBuilder" class="net.rubyeye.xmemcached.XMemcachedClientBuilder">
+        <constructor-arg>
+            <list>
+                <bean class="java.net.InetSocketAddress">
+                    <constructor-arg>
+                        <value>${memcached.server.address}</value>
+                    </constructor-arg>
+                    <constructor-arg>
+                        <value>${memcached.server.port}</value>
+                    </constructor-arg>
+                </bean>
+            </list>
+        </constructor-arg>
+        <constructor-arg>
+            <list>
+                <value>1</value>
+            </list>
+        </constructor-arg>
+        <property name="connectionPoolSize" value="50"></property>
+        <property name="opTimeout" value="50000"></property>
+        <property name="commandFactory">
+            <bean class="net.rubyeye.xmemcached.command.TextCommandFactory"/>
+        </property>
+        <property name="sessionLocator">
+            <bean class="net.rubyeye.xmemcached.impl.KetamaMemcachedSessionLocator"/>
+        </property>
+        <property name="transcoder">
+            <bean class="net.rubyeye.xmemcached.transcoders.SerializingTranscoder"/>
+        </property>
+    </bean>
+    <bean name="memcachedClient" factory-bean="memcachedClientBuilder"
+          factory-method="build" destroy-method="shutdown"/>
+
+    <!-- shiro -->
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <property name="securityManager" ref="securityManager"/>
+        <property name="filters">
+            <map>
+                <entry key="loginAuth">
+                    <bean class="cn.damai.boss.projectreport.manager.filter.AuthenticateFilter"/>
+                </entry>
+            </map>
+        </property>
+        <property name="filterChainDefinitions">
+            <value>
+                /welcome.do = anon
+                /userLogin.do = anon
+                /content/** = anon
+                /thirdparty/** = anon
+                /** = loginAuth
+            </value>
+        </property>
+    </bean>
+    <bean id="reportManagerAuthorizingRealm"
+		class="cn.damai.boss.projectreport.manager.filter.ReportManagerAuthorizingRealm">
+    </bean>
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="realm" ref="reportManagerAuthorizingRealm"/>
+        <property name="cacheManager" ref="cacheManager"/>
+    </bean>
+    <bean id="cacheManager" class="org.apache.shiro.cache.MemoryConstrainedCacheManager"/>
+    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+
+    <import resource="classpath:applicationContext-dubbo.xml"/>
+    <!--<import resource="classpath:applicationContext-jms.xml"/>-->
+
+</beans>

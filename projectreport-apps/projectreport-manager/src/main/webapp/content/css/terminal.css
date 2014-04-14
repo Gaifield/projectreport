@@ -1,0 +1,288 @@
+@charset "utf-8";
+/* CSS Document */
+/**
+ * Created with WuJianMei.
+ * 更新： 2013-05-20 16：00
+ * B2C业务管控平台_电子钱包
+ */
+.mt5{ margin-top:5px;}
+.ml3{ margin-left:3px;}
+.ml62{ margin-left:62px;}
+.pt5{ padding-top:5px;}
+.pb5{ padding-bottom:5px;}
+.pl5{ padding-left:5px;}
+.pt30{ padding-top:30px;}
+.pt10{ padding-top:10px;}
+.mb20{ margin-bottom:20px;}
+.ml390{ margin-left:390px;}
+.m_c20{ color:#078dd6;}
+.m_c21{ color:#758a9b;}
+.w60{ width:60px;}
+.w140{ width:140px;}
+.w263{ width:263px;}
+.w480{ width:480px;}
+.w650{ width:650px;}
+.mb10{ margin-bottom:10px;}
+.vertical_align_m{ vertical-align:middle;}
+.text_r{ text-align:right;}
+.ter_radio{ vertical-align:middle;}
+.ter_jszh_border{ border:1px solid #d3dae0; padding:5px 5px;color:#3e3c3d;}
+.add-xzzdsb {
+	background:url(../images/add-xzzdsb.png) no-repeat;
+    display: block;
+    width: 113px;
+    height:28px;
+    overflow: hidden;
+    text-indent: -100px;
+    position: absolute;
+    top: 8px;
+    right: 10px;
+}
+
+.add-xzzdsb:hover{
+    background-position: 0 -28px;
+}
+.add-sx {
+	background:url(../images/m-sx-btn.png) no-repeat;
+    display: block;
+    width: 91px;
+    height:28px;
+    overflow: hidden;
+    text-indent: -100px;
+    position: absolute;
+    top: 8px;
+    right: 140px;
+}
+
+.add-sx:hover{
+    background-position: 0 -28px;
+}
+.datagrid-cell{ text-indent:4px;}
+.m_busi-tab-head {
+	width:100%;
+    height: 24px;
+    background: #f2f5f7;
+    border-top: 1px solid #eaeaea;
+}
+.neat{ vertical-align: middle; margin-right:5px; height:24px;}
+
+/*弹窗样式1*/
+.m_xuanzhe-print {
+    width:520px;
+}
+
+.m_xuanzhe-print .pop-hc, .xuanzhe-print .pop-bc {
+    width: 500px !important;
+}
+
+.m_xuanzhe-print .pop-cnt {
+    width: 514px;
+
+}
+
+.m_xuanzhe-print-cnt {
+    padding: 20px;
+}
+
+.m_xuanzhe-print {
+    z-index: 9000
+}
+.m_pop-bc{background: url(../images/pop-sprite.png) repeat-x;background-position:0 -230px; float:left; height:51px; width:500px;}
+.m_save-button{
+    display: block;
+    float: right;
+    height: 28px;
+    margin: 10px 10px 0 0;
+    overflow: hidden;
+    text-indent: -100px;
+    width: 73px;
+    background: url(../images/vir-save.png);
+}
+.m_save-button:hover {
+    background-position: 0 -29px;
+}
+.m_save-button_two{
+    display: block;
+    height: 28px;
+    overflow: hidden;
+	margin-left:100px;
+    width: 73px;
+    background: url(../images/vir-save.png);
+}
+.m_pop-bcbtn{
+    display: block;
+    height: 28px;
+	margin-left:15px;
+    overflow: hidden;
+    width: 73px;
+    background: url(../images/cancel.png);
+	background-position:0 0;
+}
+.m_save-button_two:hover {
+    background-position: 0 -29px;
+}
+.m_pop-bcbtn:hover{
+    background-position: 0 -28px;
+}
+.m_jszh_border{ border:1px solid #d3dae0; height:28px; line-height:20px; padding:5px 5px;color:#3e3c3d;}
+.m_vir-cnt{height: auto;}
+.m_vir-cnt_two{ height:150px;}
+.l_h25{ line-height:25px;}
+.m_vir-cnt dl{ margin:10px 10px; line-height:25px;}
+
+/*弹窗样式2*/
+.m_xuanzhe-print_two {
+    width: 650px;
+	z-index:8000;
+}
+
+.m_xuanzhe-print_two .pop-hc, .xuanzhe-print_two .pop-bc {
+    width:630px !important;
+}
+
+.m_xuanzhe-print_two .pop-cnt {
+    width:644px;
+}
+
+.m_xuanzhe-print-cnt_two {
+    padding: 20px;
+}
+
+.m_xuanzhe-print_two {
+    z-index: 9000
+}
+.m_pop-bc_two{background: url(../images/pop-sprite.png) repeat-x;background-position:0 -230px; float:left; height:51px; width:630px;}
+
+.m_pop-hc{ width:650px !important; height:37px; background:url(../images/zdxq_bj.png) repeat-x; margin:0; padding:0; border:1px solid #d2dbe0;}
+.m_pop-head {
+    height:37px;
+}
+.m_pop-hc h4 {
+    font-size: 12px;
+    color: #000;
+    line-height: 36px;
+    text-indent: 12px;
+}
+.m_pop-cnt_two {
+    width:650px;
+    background:#fff;
+	border:1px solid #d2dbe0;
+    color: #768a99;
+    padding-bottom: 20px;
+}
+
+.m_xuanzhe-mid_one{ width:500px; margin:0 auto;}
+
+.role-tbody {
+    position: relative;
+    width: 100% !important;
+}
+
+.m_role-tbody, .m_role-tbody table {
+	width:100%;
+    clear: both;
+    background: #ffffff;
+    color: #768A99;
+}
+.m_role-tbody table td{
+    border-right: 1px solid #eaeaea;
+    text-indent: 20px;
+    overflow: hidden;
+	line-height:40px;
+	border-top: 1px solid #eaeaea;
+	border-left: 1px solid #eaeaea;
+	
+}
+
+.m_role-tbody table {
+    border-bottom: 1px solid #EAEAEA;
+    text-align: left;
+}
+.m_role-tbody {
+    position: relative;
+}
+.border_left{border-left: 1px solid #eaeaea;}
+.din {
+    display: none;
+}
+
+/*经纬度弹窗*/
+.m_coordinates_one{ width:500px; height: auto; margin:0 auto; padding:20px 0 0 0;}
+.m_coordinates {
+    width: 550px;
+	z-index:8000;
+}
+.m_coordinates .pop-hc, .m_coordinates .pop-bc {
+    width:530px !important;
+}
+.m_coordinates .pop-cnt {
+    width:544px;
+}
+.m_coordinates {
+    z-index: 9000
+}
+.m_coordinates_two{background: url(../images/pop-sprite.png) repeat-x;background-position:0 -230px; float:left; height:51px; width:530px;}
+.pop-qxbtn_one{
+	background:url(../images/ico-sprite.png) no-repeat;
+    display: block;
+    *display: inline;
+    width: 77px;
+    height: 32px;
+    float: right;
+    text-indent: -100px;
+    overflow: hidden;
+    margin: 8px 10px 0 0
+}
+
+.pop-qxbtn_one {
+    background-position: -23px -447px;
+}
+.pop-qxbtn_one span {
+    display: none;
+}
+.add-qysysb {
+	background:url(../images/add-qysysb.png) no-repeat;
+    display: block;
+    width: 113px;
+    height:28px;
+    overflow: hidden;
+    text-indent: -100px;
+    position: absolute;
+    top: 8px;
+    right: 10px;
+}
+
+.add-qysysb:hover{
+    background-position: 0 -28px;
+}
+.add-jysysb {
+	background:url(../images/add-jysysb.png) no-repeat;
+    display: block;
+    width: 113px;
+    height:28px;
+    overflow: hidden;
+    text-indent: -100px;
+    position: absolute;
+    top: 8px;
+    right: 10px;
+}
+
+.add-jysysb:hover{
+    background-position: 0 -28px;
+}
+.m_rol-markt {
+    background: url(../images/pop-sprite.png)
+}
+.m_rol-markt {
+    width: 100%;
+    height: 32px;
+    line-height: 32px;
+    background-position: 0 -370px;
+    overflow: hidden;
+    color: #3d3d3d;
+}
+.m_rol-markt td{
+    border-right: 1px solid #eaeaea;
+    text-indent: 20px;
+    overflow: hidden;
+}

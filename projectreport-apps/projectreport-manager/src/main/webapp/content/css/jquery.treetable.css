@@ -1,0 +1,37 @@
+.tree_table .vsstyle_node,.tree_table .vsstyle_active_node {
+    width: 30px;
+    height: 16px;
+    border: medium none;
+    margin: 0 5px 0 0;
+    padding: 0;
+    display: inline-block;
+}
+
+.tree_table .vsstyle_node{
+    width: 15px;
+}
+
+
+.tree_table .vsstyle_active_node {
+    cursor: pointer;
+}
+
+.tree_table .vsstyle_open, .tree_table .vsstyle_last_open {
+    background: url(../images/allbgs.png) no-repeat -35px 0px;
+    width: 30px;
+}
+
+.tree_table .vsstyle_shut, .tree_table .vsstyle_last_shut {
+    background: url(../images/allbgs.png) no-repeat -70px 0px;
+    width: 30px;
+}
+
+.tree_table .vsstyle_hover_open, .tree_table .vsstyle_hover_last_open {
+    background: url(../images/allbgs.png) no-repeat -105px 0px;
+    width: 30px;
+}
+
+.tree_table .vsstyle_hover_shut, .tree_table .vsstyle_hover_last_shut {
+    background: url(../images/allbgs.png) no-repeat -70px 0px;
+    width: 30px;
+}

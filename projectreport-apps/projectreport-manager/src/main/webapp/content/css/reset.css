@@ -1,0 +1,169 @@
+@charset "utf-8";
+/**
+ * Created with HuangMaoMao.
+ * Date: 12-12-17
+ * Time: 上午11:26
+ * 重置浏览器样式
+ */
+html{
+    color: #909090;
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+    overflow-x:scroll;
+	font-size:12px;
+}
+
+.index-html{
+    background: url(../images/content-bj.png);
+    height: auto;
+}
+
+body{
+    /**overflow: hidden;*/
+    position: relative;
+}
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    color: #909090;
+    text-decoration: none;
+    outline: none;
+    blr: expression(this.onFocus=this.blur());
+}
+
+a:hover {
+    color: #e51a45;
+    text-decoration: underline;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    word-break: break-all;
+}
+
+fieldset, img {
+    border: 0;
+}
+
+address, caption, cite, code, dfn, em, th, var {
+    font-style: normal;
+    font-weight: normal;
+}
+
+ol, ul {
+    list-style: none;
+}
+
+caption {
+    text-align: left;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-size: 100%;
+    font-weight: normal;
+}
+
+q:before, q:after {
+    content: '';
+}
+
+abbr, acronym {
+    border: 0;
+    font-variant: normal;
+}
+
+sup {
+    vertical-align: text-top;
+}
+
+sub {
+    vertical-align: text-bottom;
+}
+
+input, textarea, select {
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    outline: none
+}
+
+input, textarea, select {
+    *font-size: 100%;
+}
+
+legend {
+    color: #000;
+}
+
+body, button, input, select, textarea {
+    font: 12px/1.5 arial;
+}
+
+.hidden {
+    display: none;
+}
+
+.clear:after {
+    content: '\20';
+    display: block;
+    height: 0;
+    clear: both;
+}
+
+.clear {
+    *zoom: 1;
+}
+
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+}
+
+.fn {
+    float: none;
+}
+
+.tl {
+    text-align: left;
+}
+
+.tc {
+    text-align: center;
+}
+
+.tr {
+    text-align: right;
+}
+
+.vm {
+    vertical-align: middle;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.mr15 {
+    margin-right: 15px;
+}
+
+.mask {
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+    opacity: 0.5;
+    filter: alpha(opacity = 50);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9000;
+    border: none;
+}

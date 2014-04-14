@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="jmsConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+        <property name="brokerURL">
+            <value>failover:(${mq.projectreport.url})</value>
+        </property>
+    </bean>
+
+
+    <bean id="pooledConnectionFactory" class="org.apache.activemq.pool.PooledConnectionFactory" destroy-method="stop">
+        <property name="connectionFactory" ref="jmsConnectionFactory">
+        </property>
+        <!-- 每个连接的最大活动会话,默认500 -->
+        <property name="maximumActiveSessionPerConnection" value="100" />
+        <!-- 空闲连接超时时间,单位:毫秒 -->
+        <property name="idleTimeout" value="30000" />
+        <!-- 如果连接池是满的,则阻塞 -->
+        <property name="blockIfSessionPoolIsFull" value="true" />
+        <!-- 最大连接数 -->
+        <property name="maxConnections" value="100" />
+    </bean>
+    <!-- 消息模板 -->
+    <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+        <property name="connectionFactory">
+            <ref local="pooledConnectionFactory"/>
+        </property>
+        <!-- 非持久保存消息 -->
+        <property name="deliveryMode" value="1"/>
+        <!-- 不使用事物 -->
+        <property name="sessionTransacted" value="false"/>
+        <property name="messageIdEnabled" value="true"/>
+        <!-- 消息过期时间-单位:毫秒  24*60*60*1000 -->
+        <property name="timeToLive" value="60000"/>
+        <!-- PTP时为false,pub时为true -->
+        <property name="pubSubDomain" value="false"/>
+    </bean>
+
+    <!-- 连通性测试消息目的地 -->
+    <bean id="destination" class="org.apache.activemq.command.ActiveMQQueue">
+        <constructor-arg index="0">
+            <value>${mq.maitix.queue.name}</value>
+        </constructor-arg>
+    </bean>
+
+   <!-- <bean id="messageSender" class="cn.damai.boss.maitix.MessageSender">
+        <property name="jmsTemplate" ref="jmsTemplate"/>
+        <property name="destination" ref="destination"></property>
+    </bean>-->
+</beans>

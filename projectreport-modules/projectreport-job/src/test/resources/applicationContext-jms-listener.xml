@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean id="jmsConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+		<property name="brokerURL">
+			<value>failover:(${mq.projectreport.url})</value>
+		</property>
+	</bean>
+
+
+	<bean id="pooledConnectionFactory" class="org.apache.activemq.pool.PooledConnectionFactory"
+		destroy-method="stop">
+		<property name="connectionFactory" ref="jmsConnectionFactory">
+		</property>
+		<!-- 每个连接的最大活动会话,默认500 -->
+		<property name="maximumActiveSessionPerConnection" value="100" />
+		<!-- 空闲连接超时时间,单位:毫秒 -->
+		<property name="idleTimeout" value="30000" />
+		<!-- 如果连接池是满的,则阻塞 -->
+		<property name="blockIfSessionPoolIsFull" value="true" />
+		<!-- 最大连接数 -->
+		<property name="maxConnections" value="100" />
+	</bean>
+	<!-- 消息模板 -->
+	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory">
+			<ref local="pooledConnectionFactory" />
+		</property>
+		<!-- 非持久保存消息 -->
+		<property name="deliveryMode" value="1" />
+		<!-- 不使用事物 -->
+		<property name="sessionTransacted" value="false" />
+		<property name="messageIdEnabled" value="true" />
+		<!-- 消息过期时间-单位:毫秒 24*60*60*1000 -->
+		<property name="timeToLive" value="60000" />
+		<!-- PTP时为false,pub时为true -->
+		<property name="pubSubDomain" value="false" />
+	</bean>
+
+	<!-- 连通性测试消息目的地 -->
+	<bean id="destination" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg index="0">
+			<value>${mq.projectreport.queue.name}</value>
+		</constructor-arg>
+	</bean>
+
+	<!-- 消息监听器 -->
+	<bean id="messageListener"
+		class="cn.damai.boss.projectreport.task.ProjectReportTaskMessageListener">
+		<property name="projectTaskExecuters">
+			<map key-type="java.lang.String">
+				<entry key="1" value-ref="projectReportTaskSaleExecuter" />
+				<entry key="2" value-ref="projectReportTaskSeatStatExecuter" />
+				<entry key="3" value-ref="projectReportTaskSellerSaleExecuter" />
+				<entry key="4" value-ref="projectReportTaskReserveStatExecuter" />
+				<entry key="5" value-ref="projectReportTaskStandStatExecuter" />
+			</map>
+		</property>
+	</bean>
+	<bean id="listenerContainer"
+		class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="pooledConnectionFactory" />
+		<property name="destination" ref="destination" />
+		<property name="messageListener" ref="messageListener" />
+		<property name="maxConcurrentConsumers" value="1" />
+		<property name="idleTaskExecutionLimit" value="1" />
+	</bean>
+
+	<!-- 项目任务执行对象 -->
+	<!-- 1、项目出票统计 -->
+	<bean id="projectReportTaskSaleExecuter"
+		class="cn.damai.boss.projectreport.task.ProjectReportTaskSaleExecuter">
+		<property name="name" value="项目出票统计任务"></property>
+	</bean>
+	<!-- 2、项目座位统计 -->
+	<bean id="projectReportTaskSeatStatExecuter"
+		class="cn.damai.boss.projectreport.task.ProjectReportTaskSeatStatExecuter">
+		<property name="name" value="项目座位统计任务"></property>
+	</bean>
+	<!-- 3、项目渠道销售统计 -->
+	<bean id="projectReportTaskSellerSaleExecuter"
+		class="cn.damai.boss.projectreport.task.ProjectReportTaskSellerSaleExecuter">
+		<property name="name" value="项目渠道销售统计任务"></property>
+	</bean>
+	<!-- 4、项目预留统计 -->
+	<bean id="projectReportTaskReserveStatExecuter"
+		class="cn.damai.boss.projectreport.task.ProjectReportTaskReserveStatExecuter">
+		<property name="name" value="项目预留统计任务"></property>
+	</bean>
+	<!-- 5、项目分区出票统计 -->
+	<bean id="projectReportTaskStandStatExecuter"
+		class="cn.damai.boss.projectreport.task.ProjectReportTaskStandStatExecuter">
+		<property name="name" value="项目分区出票统计任务"></property>
+	</bean>
+</beans>

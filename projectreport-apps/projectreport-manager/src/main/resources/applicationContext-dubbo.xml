@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans         http://www.springframework.org/schema/beans/spring-beans.xsd         http://code.alibabatech.com/schema/dubbo         http://code.alibabatech.com/schema/dubbo/dubbo.xsd   http://www.springframework.org/schema/context  http://www.springframework.org/schema/context/spring-context-3.1.xsd
+ http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+ ">
+    
+    <!-- 提供方应用信息，用于计算依赖关系 -->
+    <dubbo:application name="projectreport"/>
+    <!-- 使用multicast广播注册中心暴露服务地址 -->
+    <dubbo:registry address="${oadubbo.zookeeper.address}"/>
+    <!-- 用dubbo协议在20880端口暴露服务 -->
+
+    <!-- 声明需要调用的服务接口 -->
+
+    <!-- OA -->
+    <dubbo:reference id="organizationContactFacade"
+                     interface="cn.damai.component.organization.facade.OrganizationContactFacade" protocol="dubbo"/>
+    <dubbo:reference id="organizationFacade"
+                     interface="cn.damai.component.organization.facade.OrganizationFacade" protocol="dubbo"/>
+    <dubbo:reference id="organizationPersonFacade"
+                     interface="cn.damai.component.organization.facade.OrganizationPersonFacade" protocol="dubbo"/>
+    <dubbo:reference id="personFacade"
+                     interface="cn.damai.component.organization.facade.PersonFacade" protocol="dubbo"/>
+    <dubbo:reference id="positionFacade"
+                     interface="cn.damai.component.organization.facade.PositionFacade" protocol="dubbo"/>
+    <dubbo:reference id="userFacade"
+                     interface="cn.damai.component.user.facade.UserFacade" protocol="dubbo"/>
+
+    <!-- RegionData -->
+    <dubbo:reference
+            interface="cn.damai.commons.referencedata.regiondata.api.RegionDataService"
+            id="regionDataService" protocol="dubbo"/>
+
+    <!-- 组织机构用户接口 -->
+	<dubbo:reference interface="cn.damai.soa.maitix.user.service.OrgUserManagerService"
+		id="soaOrgUserManagerService" protocol="dubbo" />
+</beans>
+

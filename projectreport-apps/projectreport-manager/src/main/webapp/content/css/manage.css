@@ -1,0 +1,82 @@
+@charset "utf-8";
+/**
+ * Created with CaoNing.
+ * Date: 13-1-5
+ * Time: 下午15:00
+ * 更新： 2013-1-5 18：00
+ * 特权管理样式
+ */
+.pdl15 { padding-left:15px;}
+.tequan-cnt .rol-markt { padding:0;} 
+.tequan-cnt .busi-tab-head { color:#333;} 
+
+.tequan-cnt .tequan-add-btn { display: block; width: 80px; height: 33px; overflow: hidden; text-indent: -200px; background: url(../images/add-tquan-btn.png) no-repeat; margin-right:20px;}
+.tequan-cnt .tequan-add-btn:hover { background-position:0 -33px;}
+.tequan-cnt .tequan-reg-btn { display: block; width: 94px; height: 31px; overflow: hidden; text-indent: -200px; background: url(../images/add-tquan-btn.png) no-repeat 0 -66px;}
+.tequan-cnt .tequan-reg-btn:hover { background-position:0 -97px;}
+ 
+.tequan-cnt .tequan-box { padding:20px; position:relative; *zoom:1; }
+.tequan-cnt .tequan-box .vir-table th,
+.tequan-cnt .tequan-box .vir-table td { text-align:center; text-indent:0;}
+
+.tequan-cnt .tequan-box .tequan-down { cursor:pointer;}
+.tequan-cnt .tequan-box .tequan-down .tequan-down-con { width:100%; position:relative;}
+.tequan-cnt .tequan-box .tequan-down .tequan-sel { display:inline-block; width:9px; height:6px; background:url(../images/tq-ico.png) no-repeat 10px 0; padding-left:10px;}
+.tequan-cnt .tequan-box .tequan-down .tequan-cho { display:none; width:100%; border:2px solid #c7d2d6; padding:4px 0; background-color:#fff; position:absolute; left:0; top:40px; z-index:99;}
+.tequan-cnt .tequan-box .tequan-down .tequan-cho li { line-height:23px;}
+.tequan-cnt .tequan-box .tequan-down .tequan-cho li a { display:block; height:23px; line-height:23px; color:#0070a2; border:1px solid #fff; border-left:none; border-right:none; text-align:left; padding-left:10px;}
+.tequan-cnt .tequan-box .tequan-down .tequan-cho li .on,
+.tequan-cnt .tequan-box .tequan-down .tequan-cho li a:hover { text-decoration:none; background-color:#fffeeb; color:#333; border-color:#c7d2d6;}
+
+.tequan-cnt .tequan-group1 .tequan-off { display:block; width:20px; height:20px; background:url(../images/tq-ico.png) no-repeat 6px -14px; position:absolute; right:4px; top:4px;}
+.tequan-cnt .radio-label { color:#333; line-height:24px;}
+.tequan-cnt .tequan-list .tequan-dirs { min-width:0; padding-right:20px;}
+.tequan-cnt .tequan-vir { width:400px;}
+.tequan-cnt .tequan-vir .vir-inp { width:390px;}
+.tequan-cnt .tequan-addid { display:block; float:left; line-height:24px; padding-left:20px; color:#016fa2; background:url(../images/tq-ico.png) no-repeat 5px -34px;}
+
+.tequan-cnt .tequan-price { width:310px;}
+.tequan-cnt .tequan-price .vir-inp { width:300px;}
+.tequan-cnt .fix-price { display:block; width:94px; height:26px; background:url(../images/add-tquan-btn.png) no-repeat 0 -128px; float: left;}
+.tequan-cnt .fix-price:hover { background-position:0 -154px;}
+
+.tequan-cnt .tequan-list { float:left; padding-left:20px;}
+.tequan-cnt .tequan-list li { margin-bottom:10px;}
+.tequan-cnt .tequan-list li p { padding-bottom:5px; overflow:hidden; *zoom:1;}
+.tequan-cnt .tequan-list li p .radio-label { float:left;}
+.tequan-cnt .tequan-list li p .cor-red { font-size:14px; font-weight:bold; color:#ff0033;}
+.tequan-cnt .tequan-list li p .cor-gray { color:#cccccc;}
+.tequan-cnt .tequan-list li p .fix-txt { float:left; color:#333; margin-right:45px;}
+.tequan-cnt .tequan-list li p .vir-inp { width:28px; height:18px; margin:3px 5px 0 0;}
+
+/*添加特权弹层*/
+.w200 { width:200px;} 
+.tequan-pop { height:auto; padding:25px 0;}
+
+/*-------------------------------------
+Modified By:		CaoNing
+Modified Time:	2013-07-29 10:00
+--------------------------------------*/
+/*大麦搜索*/
+.search_cnt .search-add-btn,
+.search_pop .search-add-btn { display:block; width:73px; height:28px; line-height:28px; text-align:center; font-size:14px; color:#fff; background:url(../images/add-first-btn.png) no-repeat; margin:2px 20px 0 0; text-shadow:1px 1px 1px #80a236; }
+.search_cnt .search-add-btn:hover,
+.search_pop .search-add-btn:hover { background-position:0 -28px; text-decoration:none; }
+.search_cnt .inp-bj span { color:#333; line-height:33px; }
+.search_cnt .inp-bj .search_tips { color:#909090; }
+.search_cnt .search_list { padding:10px 0 10px 25px; }
+.search_cnt .search_list li { width:46%; padding:0 4% 10px 0; float:left; }
+.search_cnt .search_list li .hove-line { display:none; }
+.search_cnt .search_list li .role-tbody table,
+.search_cnt .search_list li .busi-tab-head { border-left: 1px solid #eaeaea; }
+.search_cnt .search_list li .search_tit { height:30px; line-height:30px; text-align:center; font-size:14px; font-weight:bold; color:#333; padding-bottom:10px; }
+.search_pop .pro-id { width:80px; }
+.search_pop .erro-tips { display:block; width:75px; padding-left:5px; color:#999; float:left; }
+.search_pop .search-add-btn { margin:10px 10px 0 0; float:right; }
+.channel_search .channel-tab-head,
+.channel_search .search-clo { background:none; }
+.channel_search .channel-tab-sea { padding:0; }
+.channel_search .search_tips { display:inline-block; height:28px; line-height:28px; background-color:#f2f2f2; border:1px solid #c9c9c9; color:#999; padding:0 15px; margin:15px 0 0 15px; }
+.channel_search .mark-table .text { height:22px; border:1px solid #eaeaea; text-align:center; }
+.channel_search .channel-tab .search-add-btn { float:left; margin:3px 10px 0 0; }
+.mask { z-index:8000; }

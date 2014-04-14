@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>cn.damai.boss</groupId>
+		<artifactId>projectreport-modules</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>projectreport-job</artifactId>
+	<packaging>jar</packaging>
+
+	<dependencies>
+		<!-- 大麦项目报表 -->
+		<dependency>
+			<groupId>cn.damai.boss</groupId>
+			<artifactId>projectreport-commons</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>cn.damai.boss</groupId>
+			<artifactId>projectreport-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>cn.damai.boss</groupId>
+			<artifactId>projectreport-impl</artifactId>
+		</dependency>
+
+		<!--quartz 定时任务 -->
+		<dependency>
+			<groupId>org.quartz-scheduler</groupId>
+			<artifactId>quartz</artifactId>
+		</dependency>
+
+		<!-- dubbo -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>dubbo</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.github.sgroschupf</groupId>
+			<artifactId>zkclient</artifactId>
+		</dependency>
+		
+	</dependencies>
+	<build>
+		<finalName>projectreport-job</finalName>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <excludes>
+                    <exclude>assemble/**/*</exclude>
+                    <exclude>conf/config/**/*</exclude>
+                    <exclude>conf/spring/**/*</exclude>
+                    <exclude>conf/*.properties</exclude>
+                </excludes>
+            </resource>
+        </resources>
+		<!--自定义打包插件,不需修改 -->
+		<plugins>
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<configuration>
+					<appendAssemblyId>true</appendAssemblyId>
+					<descriptors>
+						<!--自定义打包描述文件 -->
+						<descriptor>src/main/resources/assemble/package.xml</descriptor>
+					</descriptors>
+				</configuration>
+				<executions>
+					<execution>
+						<id>make-assembly</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>	
+</project>

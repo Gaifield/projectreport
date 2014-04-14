@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.0.xsd">
+  	
+	<context:property-placeholder location="classpath*:crius.properties"
+		ignore-unresolvable="true" />
+
+	<!-- 定时任务服务类 -->
+	<bean id="jobService" class="cn.damai.boss.projectreport.job.impl.JobServiceImpl">
+		<property name="jobTasks">
+			<set>
+				<ref bean="synchronizeProjectTaskService"/>  
+			</set>
+		</property>
+	</bean>
+
+	<!-- 定时同步项目任务 -->
+	<bean id="synchronizeProjectTaskService"
+		class="cn.damai.boss.projectreport.job.impl.task.SynchronizeProjectJobTaskServiceImpl">
+		<property name="taskName" value="同步过期项目定时任务"></property>
+		<property name="projectReportTasks">
+			<set>
+				<ref bean="projectReportTaskSale"/>
+				<ref bean="projectReportTaskSale"/>
+				<ref bean="projectReportTaskSeatStat"/>
+				<ref bean="projectReportTaskSellerSale"/>
+				<ref bean="projectReportTaskReserveStat"/>
+				<ref bean="projectReportTaskStandStat"/>
+			</set>
+		</property>
+	</bean>
+
+	<!-- 1、项目出票统计 -->
+	<bean id="projectReportTaskSale"
+		class="cn.damai.boss.projectreport.job.impl.task.ProjectReportTaskSaleImpl">
+		<property name="taskName" value="项目出票统计任务"></property>
+	</bean>
+	<!-- 2、项目座位统计 -->
+	<bean id="projectReportTaskSeatStat"
+		class="cn.damai.boss.projectreport.job.impl.task.ProjectReportTaskSeatStatImpl">
+		<property name="taskName" value="项目座位统计任务"></property>
+	</bean>
+	<!-- 3、项目渠道销售统计 -->
+	<bean id="projectReportTaskSellerSale"
+		class="cn.damai.boss.projectreport.job.impl.task.ProjectReportTaskSellerSaleImpl">
+		<property name="taskName" value="项目渠道销售统计任务"></property>
+	</bean>
+	<!-- 4、项目预留统计 -->
+	<bean id="projectReportTaskReserveStat"
+		class="cn.damai.boss.projectreport.job.impl.task.ProjectReportTaskReserveStatImpl">
+		<property name="taskName" value="项目预留统计任务"></property>
+	</bean>
+	<!-- 5、项目分区出票统计 -->
+	<bean id="projectReportTaskStandStat"
+		class="cn.damai.boss.projectreport.job.impl.task.ProjectReportTaskStandStatImpl">
+		<property name="taskName" value="项目分区出票统计任务"></property>
+	</bean>
+</beans>

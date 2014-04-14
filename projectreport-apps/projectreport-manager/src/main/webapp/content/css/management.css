@@ -1,0 +1,37 @@
+@charset "utf-8";
+/* CSS Document */
+/**
+ * Created with WuJianMei.
+ * 更新： 2013-05-24 16：00
+ * B2C票纸管理系统
+ */
+* { margin:0; padding:0; list-style:none; font-size:12px;}
+html { height:100%;}
+body { height:100%;}
+.font_family_v{ font-family:"微软雅黑";}
+.centerDiv { display:inline-block; zoom:1; *display:inline; vertical-align:middle; text-align: center; width:550px; padding:10px 10px; position:relative;}
+.hiddenDiv { height:100%; overflow:hidden; display:inline-block; width:1px; overflow:hidden; margin-left:-1px; zoom:1; *display:inline; *margin-top:-1px; _margin-top:0; vertical-align:middle;}
+.f40{ font-size:40px;}
+.f14{ font-size:14px;}
+.man_c1{ color:#00579e;}
+.f12{ font-size:12px;}
+.f14{ font-size:14px;}
+.mt20{ margin-top:20px;}
+.m_line_height{ line-height:28px;}
+.m_center{ width:100%; margin:0 auto; padding:0;}
+.add-jr {
+	background:url(../images/add-jr.png) no-repeat;
+    display: block;
+    width: 73px;
+    height:28px;
+    overflow: hidden;
+    text-indent: -100px;
+    position: absolute;
+	top:0;
+    right:120px;
+}
+.add-jr:hover{
+    background-position: 0 -28px;
+}
+.callout{ width:400px; background:#e1e9ef; margin:5px 0 0 20px; position:absolute; left:0}
+.m_center_btn{ position:relative; left:-50px;}

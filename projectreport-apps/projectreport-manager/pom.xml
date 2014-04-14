@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>cn.damai.boss</groupId>
+        <artifactId>projectreport-apps</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <artifactId>projectreport-manager</artifactId>
+    <packaging>war</packaging>
+    <dependencies>
+        <!--大麦业务报表-->
+        <dependency>
+            <groupId>cn.damai.boss</groupId>
+            <artifactId>projectreport-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.damai.boss</groupId>
+            <artifactId>projectreport-impl</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.damai.boss</groupId>
+            <artifactId>projectreport-commons</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.struts</groupId>
+            <artifactId>struts2-json-plugin</artifactId>
+        </dependency>
+        		<dependency>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+		</dependency>
+    </dependencies>
+
+    <build>
+        <finalName>projectreport-manager</finalName>
+    </build>
+</project>

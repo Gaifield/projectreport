@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>cn.damai.boss</groupId>
+		<artifactId>projectreport-modules</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+	<artifactId>projectreport-impl</artifactId>
+	<packaging>jar</packaging>
+	<dependencies>
+
+		<!--大麦业务报表 -->
+		<dependency>
+			<groupId>cn.damai.boss</groupId>
+			<artifactId>projectreport-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>cn.damai.boss</groupId>
+			<artifactId>projectreport-commons</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.1.36</version>
+		</dependency>
+           
+	</dependencies>
+</project>

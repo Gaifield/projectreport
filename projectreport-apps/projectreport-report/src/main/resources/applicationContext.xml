@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+        http://www.springframework.org/schema/data/jpa
+        http://www.springframework.org/schema/data/jpa/spring-jpa-1.0.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+
+	<context:property-placeholder location="classpath*:crius.properties"
+		ignore-unresolvable="true" />
+
+	<aop:aspectj-autoproxy proxy-target-class="true" />
+	<context:component-scan
+		base-package="cn.damai.boss.projectreport.common.service.impl,cn.damai.boss.projectreport.manager.dao.impl,cn.damai.boss.projectreport.manager.service.impl,cn.damai.boss.projectreport.report.dao.impl,cn.damai.boss.projectreport.report.service.impl">
+	</context:component-scan>
+
+	<!-- 报表数据源 -->
+	<bean id="reportDataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${projectreport.jdbc.driverClassName}" />
+		<property name="url" value="${projectreport.jdbc.url}" />
+		<property name="username" value="${projectreport.jdbc.username}" />
+		<property name="password" value="${projectreport.jdbc.password}" />
+		<!--连接池启动时的初始化 -->
+		<property name="initialSize" value="${projectreport.jdbc.initialSize}" />
+		<!--连接池的最大值 -->
+		<property name="maxActive" value="${projectreport.jdbc.maxActive}" />
+		<!-- 最大空闲值，当经过一个高峰时间后，连接池可以慢慢将已经用不到的链接慢慢释放一部分，一直减少到maxle为止 -->
+		<property name="maxIdle" value="${projectreport.jdbc.maxIdle}" />
+		<!-- 最小空闲值，当空闲的连接数少于阀值时，连接池就会预申请去一些链接，以免洪峰来时来不及申请 -->
+		<property name="minIdle" value="${projectreport.jdbc.minIdle}" />
+		<!-- 验证数据库连接的有效性 -->
+		<!-- 失效检查线程运行时间间隔，如果小于等于0，不会启动检查线程 -->
+		<property name="timeBetweenEvictionRunsMillis" value="10000" />
+		<!--大于0 ，进行连接空闲时间判断，或为0，对空闲的连接不进行验证；默认30分钟 单位：毫秒 -->
+		<property name="minEvictableIdleTimeMillis" value="600000" />
+		<!-- 用于验证连接是否成功的查询SQL语句，SQL语句必须至少要返回一行数据 -->
+		<property name="validationQuery" value="SELECT 1 FROM Dual" />
+		<!--是否自我中断，默认是 false -->
+		<property name="removeAbandoned" value="true" />
+		<!-- 几秒后数据连接会自动断开，在removeAbandoned为true，提供该值 -->
+		<property name="removeAbandonedTimeout" value="120" />
+		<!-- 是否记录中断事件， 默认为 false； -->
+		<property name="logAbandoned" value="true" />
+		<!-- 取得对象时是否进行验证，检查对象是否有效，默认为false -->
+		<property name="testOnBorrow" value="true" />
+	</bean>
+
+	<!-- maitix北京数据源 -->
+	<bean id="maitixBJDataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${jdbc.maitix.driver}" />
+		<property name="url" value="${jdbc.maitixBJ.url}" />
+		<property name="username" value="${jdbc.maitix.username}" />
+		<property name="password" value="${jdbc.maitix.password}" />
+		<property name="initialSize" value="${jdbc.maitix.initialSize}" />
+		<property name="maxActive" value="${jdbc.maitix.maxActive}" />
+		<property name="maxIdle" value="${jdbc.maitix.maxIdle}" />
+		<property name="minIdle" value="${jdbc.maitix.minIdle}" />
+		<!-- 验证数据库连接的有效性 -->
+		<property name="timeBetweenEvictionRunsMillis" value="10000" />
+		<property name="minEvictableIdleTimeMillis" value="600000" />
+		<property name="validationQuery" value="SELECT GETDATE()" />
+		<property name="removeAbandoned" value="true" />
+		<property name="removeAbandonedTimeout" value="120" />
+		<property name="logAbandoned" value="true" />
+		<property name="testOnBorrow" value="true" />
+	</bean>
+	<!-- maitix上海数据源 -->
+	<bean id="maitixSHDataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${jdbc.maitix.driver}" />
+		<property name="url" value="${jdbc.maitixSH.url}" />
+		<property name="username" value="${jdbc.maitix.username}" />
+		<property name="password" value="${jdbc.maitix.password}" />
+		<property name="initialSize" value="${jdbc.maitix.initialSize}" />
+		<property name="maxActive" value="${jdbc.maitix.maxActive}" />
+		<property name="maxIdle" value="${jdbc.maitix.maxIdle}" />
+		<property name="minIdle" value="${jdbc.maitix.minIdle}" />
+		<!-- 验证数据库连接的有效性 -->
+		<property name="timeBetweenEvictionRunsMillis" value="10000" />
+		<property name="minEvictableIdleTimeMillis" value="600000" />
+		<property name="validationQuery" value="SELECT GETDATE()" />
+		<property name="removeAbandoned" value="true" />
+		<property name="removeAbandonedTimeout" value="120" />
+		<property name="logAbandoned" value="true" />
+		<property name="testOnBorrow" value="true" />
+	</bean>
+	<!-- maitix广州数据源 -->
+	<bean id="maitixGZDataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${jdbc.maitix.driver}" />
+		<property name="url" value="${jdbc.maitixGZ.url}" />
+		<property name="username" value="${jdbc.maitix.username}" />
+		<property name="password" value="${jdbc.maitix.password}" />
+		<property name="initialSize" value="${jdbc.maitix.initialSize}" />
+		<property name="maxActive" value="${jdbc.maitix.maxActive}" />
+		<property name="maxIdle" value="${jdbc.maitix.maxIdle}" />
+		<property name="minIdle" value="${jdbc.maitix.minIdle}" />
+		<!-- 验证数据库连接的有效性 -->
+		<property name="timeBetweenEvictionRunsMillis" value="10000" />
+		<property name="minEvictableIdleTimeMillis" value="600000" />
+		<property name="validationQuery" value="SELECT GETDATE()" />
+		<property name="removeAbandoned" value="true" />
+		<property name="removeAbandonedTimeout" value="120" />
+		<property name="logAbandoned" value="true" />
+		<property name="testOnBorrow" value="true" />
+	</bean>
+	<!-- maitix只读数据源 -->
+	<bean id="maitixReadOnlyDataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${jdbc.maitix.driver}" />
+		<property name="url" value="${jdbc.maitix.url}" />
+		<property name="username" value="${jdbc.maitix.username}" />
+		<property name="password" value="${jdbc.maitix.password}" />
+		<property name="initialSize" value="${jdbc.maitix.initialSize}" />
+		<property name="maxActive" value="${jdbc.maitix.maxActive}" />
+		<property name="maxIdle" value="${jdbc.maitix.maxIdle}" />
+		<property name="minIdle" value="${jdbc.maitix.minIdle}" />
+		<!-- 验证数据库连接的有效性 -->
+		<property name="timeBetweenEvictionRunsMillis" value="10000" />
+		<property name="minEvictableIdleTimeMillis" value="600000" />
+		<property name="validationQuery" value="SELECT GETDATE()" />
+		<property name="removeAbandoned" value="true" />
+		<property name="removeAbandonedTimeout" value="120" />
+		<property name="logAbandoned" value="true" />
+		<property name="testOnBorrow" value="true" />
+	</bean>
+	<!-- B平台数据源 -->
+	<bean id="bPlatformDataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${jdbc.maitix.driver}" />
+		<property name="url" value="${jdbc.BPlatform.url}" />
+		<property name="username" value="${jdbc.maitix.username}" />
+		<property name="password" value="${jdbc.maitix.password}" />
+		<property name="initialSize" value="${jdbc.maitix.initialSize}" />
+		<property name="maxActive" value="${jdbc.maitix.maxActive}" />
+		<property name="maxIdle" value="${jdbc.maitix.maxIdle}" />
+		<property name="minIdle" value="${jdbc.maitix.minIdle}" />
+		<!-- 验证数据库连接的有效性 -->
+		<property name="timeBetweenEvictionRunsMillis" value="10000" />
+		<property name="minEvictableIdleTimeMillis" value="600000" />
+		<property name="validationQuery" value="SELECT GETDATE()" />
+		<property name="removeAbandoned" value="true" />
+		<property name="removeAbandonedTimeout" value="120" />
+		<property name="logAbandoned" value="true" />
+		<property name="testOnBorrow" value="true" />
+	</bean>
+
+	<!-- 项目报表 -->
+	<bean id="projectReportManagerFactory"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="reportDataSource" />
+		<property name="persistenceUnitName" value="projectreport" />
+		<property name="persistenceXmlLocation" value="classpath*:META-INF/persistence.xml" />
+		<property name="jpaVendorAdapter">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+				<property name="generateDdl" value="false" />
+				<property name="showSql" value="false" />
+			</bean>
+		</property>
+	</bean>
+	<!-- 项目报表事务管理器 -->
+	<bean id="projectReportTransactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="projectReportManagerFactory" />
+	</bean>
+	<tx:annotation-driven transaction-manager="projectReportTransactionManager"
+		proxy-target-class="true" />
+	<jpa:repositories base-package="cn.damai.boss.projectreport.*.dao"
+		query-lookup-strategy="create-if-not-found" repository-impl-postfix="CustomImpl"
+		entity-manager-factory-ref="projectReportManagerFactory"
+		transaction-manager-ref="projectReportTransactionManager">
+	</jpa:repositories>
+
+	<!-- maitix只读库SessionFactory -->
+	<bean id="maitixSessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="dataSource" ref="maitixReadOnlyDataSource" />
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.show_sql">false</prop>
+				<prop key="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</prop>
+			</props>
+		</property>
+	</bean>
+	<!-- maitix北京库SessionFactory -->
+	<bean id="maitixBJSessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="dataSource" ref="maitixBJDataSource" />
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.show_sql">false</prop>
+				<prop key="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</prop>
+			</props>
+		</property>
+	</bean>
+	<!-- maitix上海库SessionFactory -->
+	<bean id="maitixSHSessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="dataSource" ref="maitixSHDataSource" />
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.show_sql">false</prop>
+				<prop key="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</prop>
+			</props>
+		</property>
+	</bean>
+	<!-- maitix广州库SessionFactory -->
+	<bean id="maitixGZSessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="dataSource" ref="maitixGZDataSource" />
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.show_sql">false</prop>
+				<prop key="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</prop>
+			</props>
+		</property>
+	</bean>
+	<!-- B平台SessionFactory -->
+	<bean id="bPlatformSessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="dataSource" ref="bPlatformDataSource" />
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.show_sql">false</prop>
+				<prop key="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</prop>
+			</props>
+		</property>
+	</bean>
+
+	<!-- 动态SessionFactory -->
+	<bean id="reportSessionFactory"
+		class="cn.damai.boss.projectreport.report.datasource.DynamicSessionFactoryImpl">
+		<property name="targetSessionFactorys">
+			<map>
+				<entry key="1" value-ref="maitixBJSessionFactory" />
+				<entry key="2" value-ref="maitixSHSessionFactory" />
+				<entry key="3" value-ref="maitixGZSessionFactory" />
+				<entry key="4" value-ref="maitixSessionFactory" />
+				<entry key="5" value-ref="bPlatformSessionFactory" />
+			</map>
+		</property>
+		<property name="defaultTargetSessionFactory" ref="maitixSessionFactory" />
+	</bean>
+	<!-- 自定义动态切换SessionFactory事务管理器，注入sessionFactory -->
+	<bean id="reportTransactionManager"
+		class="cn.damai.boss.projectreport.report.datasource.DynamicTransactionManager">
+		<property name="sessionFactory" ref="reportSessionFactory" />
+	</bean>
+	<tx:annotation-driven transaction-manager="reportTransactionManager"
+		proxy-target-class="true" />
+
+	<!--memcache -->
+	<bean name="memcachedClientBuilder" class="net.rubyeye.xmemcached.XMemcachedClientBuilder">
+		<constructor-arg>
+			<list>
+				<bean class="java.net.InetSocketAddress">
+					<constructor-arg>
+						<value>${memcached.server.address}</value>
+					</constructor-arg>
+					<constructor-arg>
+						<value>${memcached.server.port}</value>
+					</constructor-arg>
+				</bean>
+			</list>
+		</constructor-arg>
+		<constructor-arg>
+			<list>
+				<value>1</value>
+			</list>
+		</constructor-arg>
+		<property name="connectionPoolSize" value="50"></property>
+		<property name="opTimeout" value="50000"></property>
+		<property name="commandFactory">
+			<bean class="net.rubyeye.xmemcached.command.TextCommandFactory" />
+		</property>
+		<property name="sessionLocator">
+			<bean class="net.rubyeye.xmemcached.impl.KetamaMemcachedSessionLocator" />
+		</property>
+		<property name="transcoder">
+			<bean class="net.rubyeye.xmemcached.transcoders.SerializingTranscoder" />
+		</property>
+	</bean>
+	<bean name="memcachedClient" factory-bean="memcachedClientBuilder"
+		factory-method="build" destroy-method="shutdown" />
+	<!-- shiro -->
+	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+		<property name="securityManager" ref="securityManager" />
+		<property name="filters">
+			<map>
+				<entry key="loginAuth">
+					<bean
+						class="cn.damai.boss.projectreport.report.filter.ReportAuthenticateFilter" />
+				</entry>
+			</map>
+		</property>
+		<property name="filterChainDefinitions">
+			<value>
+				/welcome.do = anon
+				/userLogin.do = anon
+				/content/** = anon
+				/thirdparty/** = anon
+				/** = loginAuth
+				<!--/** = anon -->
+			</value>
+		</property>
+	</bean>
+	<bean id="reportAuthorizingRealm"
+		class="cn.damai.boss.projectreport.report.filter.ReportAuthorizingRealm"></bean>
+	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+		<property name="realm" ref="reportAuthorizingRealm" />
+	</bean>
+	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
+
+	<import resource="classpath:applicationContext-dubbo.xml" />
+	<!--<import resource="classpath:applicationContext-jms.xml"/> -->
+
+</beans>
